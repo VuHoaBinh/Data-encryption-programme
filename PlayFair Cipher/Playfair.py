@@ -43,7 +43,7 @@ def matrix(key):
 def cipher_to_message(message):
 	i=0
 	new=[]
-	for x in range(1,int(len(message)/2)):
+	for x in range(int(len(message)/2)):
 		new.append(message[i:i+2])
 		i+=2
 	return new
@@ -190,6 +190,8 @@ def PlayFair():
 
 
 	#decipher
+	key = entry_Key.get().upper()
+	message = entry_plaintext.get().upper()
 	message=cipher_to_message(message)
 	key_matrix=matrix(key)
 	decipher=[]
