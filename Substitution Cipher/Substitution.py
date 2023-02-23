@@ -1,85 +1,124 @@
-# ma thay the
+import tkinter as tk
 
-substitution_table = {
-    'a': 'x',
-    'b': 'n',
-    'c': 'y',
-    'd': 'a',
-    'e': 'h',
-    'f': 'p',
-    'g': 'o',
-    'h': 'g',
-    'i': 'z',
-    'j': 'q',
-    'k': 'w',
-    'l': 'b',
-    'm': 't',
-    'n': 's',
-    'o': 'f',
-    'p': 'l',
-    'q': 'r',
-    'r': 'c',
-    's': 'v',
-    't': 'm',
-    'u': 'u',
-    'v': 'e',
-    'w': 'k',
-    'x': 'j',
-    'y': 'd',
-    'z': 'i'
+root = tk.Tk()
+root.title("Ma hoa Substitution")
+
+label_plaintext = tk.Label(root,text ="nhap plaintext:")
+entry_plaintext = tk.Entry(root, width = 20)
+
+
+label_result_cipher = tk.Label(root,text = "")
+
+label_result_decipher = tk.Label(root,text = "")
+
+substitution_table_cipher = {
+    'A': 'X',
+    'B': 'N',
+    'C': 'Y',
+    'D': 'A',
+    'E': 'H',
+    'F': 'P',
+    'G': 'O',
+    'H': 'G',
+    'I': 'Z',
+    'J': 'Q',
+    'K': 'W',
+    'L': 'B',
+    'M': 'T',
+    'N': 'S',
+    'O': 'F',
+    'P': 'L',
+    'Q': 'R',
+    'R': 'C',
+    'S': 'V',
+    'T': 'M',
+    'U': 'U',
+    'V': 'E',
+    'W': 'K',
+    'X': 'J',
+    'Y': 'D',
+    'Z': 'I'
 }
 
-substitution_table_back = {
-    'a': 'd',
-    'b': 'l',
-    'c': 'r',
-    'd': 'y',
-    'e': 'v',
-    'f': 'o',
-    'g': 'h',
-    'h': 'e',
-    'i': 'z',
-    'j': 'x',
-    'k': 'w',
-    'l': 'p',
-    'm': 't',
-    'n': 'b',
-    'o': 'g',
-    'p': 'f',
-    'q': 'j',
-    'r': 'q',
-    's': 'n',
-    't': 'm',
-    'u': 'u',
-    'v': 's',
-    'w': 'k',
-    'x': 'a',
-    'y': 'c',
-    'z': 'i'
+substitution_table_decipher = {
+    'A': 'D',
+    'B': 'L',
+    'C': 'R',
+    'D': 'Y',
+    'E': 'V',
+    'F': 'O',
+    'G': 'H',
+    'H': 'E',
+    'I': 'Z',
+    'J': 'X',
+    'K': 'W',
+    'L': 'P',
+    'M': 'T',
+    'N': 'B',
+    'O': 'G',
+    'P': 'F',
+    'Q': 'J',
+    'R': 'Q',
+    'S': 'N',
+    'T': 'M',
+    'U': 'U',
+    'V': 'S',
+    'W': 'K',
+    'X': 'A',
+    'Y': 'C',
+    'Z': 'I'
 }
 
-def substitution_cipher(message):
+# def substitution_cipher(message):
+#     cipher_text = ''
+#     for char in message:
+#         if char in substitution_table_cipher:
+#             cipher_text += substitution_table_cipher[char]
+#         else:
+#             cipher_text += char
+#     return cipher_textx
+
+# def substitution_decipher(message):
+#     decipher_text = ''
+#     for char in message:
+#         if char in substitution_table_decipher:
+#             decipher_text += substitution_table_decipher[char]
+#         else:
+#             decipher_text += char
+#     return decipher_text
+
+
+def substitution():
+    message = entry_plaintext.get().upper()
+    
+    #cipher
     cipher_text = ''
     for char in message:
-        if char in substitution_table:
-            cipher_text += substitution_table[char]
+        if char in substitution_table_cipher:
+            cipher_text += substitution_table_cipher[char]
         else:
             cipher_text += char
-    return cipher_text
-
-def substitution_cipher_back(message):
-    cipher_text = ''
+    label_result_cipher.config(text ="Result cipher: " +  cipher_text)
+        
+    #decipher
+    decipher_text = ''
     for char in message:
-        if char in substitution_table_back:
-            cipher_text += substitution_table_back[char]
+        if char in substitution_table_decipher:
+            decipher_text += substitution_table_decipher[char]
         else:
-            cipher_text += char
-    return cipher_text
+            decipher_text += char
+    label_result_decipher.config(text ="Result decipher: " +  decipher_text)
 
-def run():
-    print(substitution_cipher("spriderman"))
-run()
+button = tk.Button(root, text="Chuyển đổi", command=substitution)
 
-def run1():
-    print(substitution_cipher_back("vlzahctxs"))
-run1()
+#GUI
+label_plaintext.grid(row=0, column=0)
+entry_plaintext.grid(row=0, column=1)
+
+label_result_cipher.grid(row=2, column=0)
+label_result_decipher.grid(row=3, column=0)
+
+
+button.grid(row=4, column=0, columnspan=2)
+
+root.mainloop()
